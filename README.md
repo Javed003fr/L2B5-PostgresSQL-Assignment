@@ -63,4 +63,105 @@
    )
 
 
+4. What is the difference between the 'VARCHAR'and 'CHAR'data types?
+   => VARCHAR and CHAR are two essential character storage types in relational database management system. Refer to the difference between VARCHAR and CHAR for elaborate one-on-one difference between them -
+
+   **VARCHAR(n) data type**
+
+   - VARCHAR stands for "Variable Characters".
+   - VARCHAR is a variable-length data type. Defining a column as VARCHAR(n) allows storage of strings up to n characters, using only as much space as needed for each entry. The (n) is referred to as the maximum limit of characters to be stored.
+   - VARCHAR is used when the length of data is unknown.
+   - VARCHAR considers a space of 1 byte for each character and it also considers some more bytes to store information about length.
+   - VARCHAR has the concept of dynamic memory allocation.
+   - VARCHAR can store data up to 65,535 characters.
+   - It does not pad values, it sotres only the acutal data without adding extra spaces.
+
+   _Example :_
+   CREATE TABLE rangers (
+   email VARCHAR(50)
+   )
+
+   **CHAR(n) data type**
+
+   - CHAR stands for "Character".
+   - CHAR data type is used to store characters of fixed length. The (n) is referred to as the length specified at the time of creating the field where the characters will be stored.
+   - It stores characters of fixed length.
+   - CHAR is used when the length of data is known so that we declare the field with same length.
+   - CHAR is considers a space of 1 byte for storing each character.
+   - CHAR has the concept of static memory allocation.
+   - CHAR can store data up to 255 characters.
+
+   _Example :_
+   CREATE TABLE rangers (
+   name CHAR(20)
+   )
+
+   The main difference between VARCHAR and CHAR is how they store character data in a database.
+
+5. Explain the purpose of the 'WHERE' Clause in a 'SELECT' statement.
+   => "WHERE" clause in a "SELECT" statement is one of the most important parts of SQL, It's used to filter data that is, to return only the column that meet specific conditions.
+
+   - It apply conditions to columns (ex: match, compare, check, null)
+   - It work with logical operatior (AND, OR, NOT)
+   - It use pattern matching (LIKE, ILIKE)
+   - WHERE clause use for filter joined tables, aggregate data or subqueries
+
+   _Basic Syntex :_
+
+   ```sql
+   SELECT column1, column2
+   FROM table_name
+   WHERE condition;
+   ```
+
+   - To Filter by value:
+
+   ```sql
+   SELECT * FROM rangers
+   WHERE region = 'Coastal Plains';
+   ```
+
+   - To shows sighting on or after May-1, 2024.
+
+   ```sql
+   SELECT * FROM sightings
+   WHERE sighting_time >= '2024-05-01';
+   ```
+
+   - Filter species that are endangered and discovered before 1800.
+
+   ```sql
+   SELECT * FROM species
+   WHERE conservation_status = 'Endangered' AND discovery_date < '1800-01-01';
+   ```
+
+   - Finds sightings where the location ends with 'Pass'.
+
+   ```sql
+   SELECT * FROM  sightings
+   WHERE location LIKE '%Pass';
+   ```
+
+6. What are the LIMIT and OFFSET clauses used for ?
+   => LIMIT and OFFSET are SQL clauses used for efficeint data retrival. LIMIT restricts the number of rows return from a query, useful for displaying specific results.
+
+   _Example :_
+
+```sql
+SELECT * FROM sightings LIMIT 5;
+```
+
+It will return the first 5 rows from the sightings table.
+
+OFFSET skips a certain number of rows, enabling pagination and efficient navigation through large datasets. Together, they optimize query performance and enhance use experience by managing data effectively.
+
+_Example :_
+
+```sql
+SELECT * FROM sightings OFFSET 5;
+```
+
+It will skips the first 5 rows, then return the rest.
+
+
 
